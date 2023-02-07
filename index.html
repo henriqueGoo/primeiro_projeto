@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas</title>
+</head>
+<style>
+    h1{
+        text-align: center;
+    }
+    fieldset{
+        text-align: center;
+        border-radius: 10px;
+        background-color:  rgba(83, 70, 110, 0.111);;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        width: 80vw;
+        margin:20px auto;
+    }
+    fieldset img{
+        width: 15%;
+        margin: 10px auto;
+        border-radius: 50%;
+    }
+    input, label, #bnt{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin: auto;
+        margin-top: 10px;
+        box-shadow: 0px 1px 5px rgba(62, 36, 114, 0.456);
+        box-shadow: inset 0px 1px 5px rgba(0, 0, 0, 0.456);
+    }
+    label{
+        box-shadow: none;
+    }
+    input{
+        width: 80%;
+        height: 20px;
+        border: 0.5px solid rgba(0, 0, 0, 0.412);
+        border-radius: 10px;
+    }
+    input:hover{
+        border: 1px solid rgb(62, 36, 114);
+    }
+    div#bnt{
+        width: 10%;
+        height:30px ;
+        text-align: center;
+        border: 1px solid rgb(62, 36, 114);
+        border-radius: 20px;
+        cursor: pointer;
+        margin: 20px auto 10px;
+    }
+    div#bnt:hover{
+        background-color:  rgb(62, 36, 114);
+        color: white;
+        transition: 0.3s;
+    }
+    input:not(:placeholder-shown){
+        border-color: green;
+    }
+    input:placeholder-shown{
+        border-color: rgb(62, 36, 114);}
+        @media screen and (max-width: 800px){
+            div#bnt{
+                width: 15%;}
+            fieldset img{
+                width: 25%;
+            }
+        }
+        @media screen and (max-width: 500px) {
+            div#bnt{
+                width: 25%;}
+            fieldset img{
+                width: 30%;
+            }
+            
+        }
+</style>
+<body>
+    <h1>Aprovado ou Reprovado</h1>
+    <form action="#">
+       
+        <fieldset> 
+            <img src="blank-profile-picture-973460_640.webp" >
+            <legend>Dígite seus dados para ver o resultado</legend>
+            <label for="nota">nota 01:</label>
+            <input type="number" name="nota" id="nota" placeholder="Informe sua primeira nota" required autocomplete="off
+            " max="10">
+            <label for="nota2">Nota 02:</label>
+            <input type="number" name="nota2" id="nota2" placeholder="Informe sua segunda nota" required autocomplete="off
+            " max="10">
+            <label for="nota3">Nota 03:</label>
+            <input type="number" name="nota3" id="nota3" placeholder="Informe sua terceira nota" required autocomplete="off
+            " max="10">
+            
+
+            <label for="falta">Faltas:</label>
+            <input type="number" name="falta" id="falta" placeholder="informe a quantidades de falta do semestre" required> 
+            
+            <div id="bnt" onclick="clicou()">enviar</div>
+            <output id="aqui">Resultado</output>
+        </fieldset>       
+    </form>
+    <h1>Verificação de idade</h1>
+    <form action="#">
+        <fieldset>
+        <img src="blank-profile-picture-973460_640.webp" id="imagem">
+        <legend>Informe sua idade</legend>
+        <label for="idade">Idade:</label>
+        <input type="text" name="idade" id="idade" placeholder="informe sua idade" required autocomplete="off">
+        <div id="bnt" value="enviar" onclick="mandar()">Enviar</div> 
+        <output id="saida">Resultado</output>
+        </fieldset>
+    </form>
+
+
+    <script>
+       
+       function clicou(){
+        var nota01 = document.querySelector('input#nota')
+        var nota02 = document.querySelector('input#nota2')
+        var nota03 = document.querySelector('input#nota3')
+        var falta = document.querySelector('input#falta')
+        var nota1 = Number(nota01.value)
+        var nota2 = Number(nota02.value)
+        var nota3 = Number(nota03.value)
+        var media = ((nota1 + nota2 + nota3)/3).toFixed(1)
+        var falta1 = Number(falta.value)
+        var saida = document.querySelector('output#aqui')
+        if(falta1 >= 10 || media <= 7){
+            saida.innerHTML = (`<br>Para ser aprovado você tem que ter no máximo 10 faltas e uma média mínima de 7 pontos. <br>Você teve ${falta1} faltas<br>Primeira nota de ${nota1} pontos <br>Segunda nota de ${nota2} pontos <br>Terceira nota de ${nota3} pontos <br>Media de ${media}<br>Portanto você foi <mark style="background-color: red;">REPROVADO</mark>`)
+        } else { 
+            saida.innerHTML = (`<br>Para ser aprovado você tem que ter no máximo 10 faltas e uma média mínima de 7 pontos. <br>Você teve ${falta1} faltas<br>Primeira nota de ${nota1} pontos <br>Segunda nota de ${nota2} pontos <br>Terceira nota de ${nota3} pontos <br>Media de ${media}<br>Portanto você foi <mark style="background-color: green;"> APROVADO</mark>`)}
+       }
+
+     
+       function mandar(){
+        var idade = document.querySelector('input#idade')
+        var idade1 = Number(idade.value)
+        var saida = document.querySelector('output#saida')
+        var img = document.querySelector("#image");
+
+        if( idade1 <= 15){
+            saida.innerHTML = ('Você ainda é considerada <mark> CRIANÇA </mark>')
+        } else if (idade1 <= 30){
+            saida.innerHTML = ('Parece que não, mas você ainda é considerado(a) <mark> JOVEM </mark>')
+        } else if (idade1 <= 60){
+            saida.innerHTML = ('Você ainda é considerada <mark> ADULTO </mark>')
+        } else if (idade1 > 60){
+            saida.innerHTML = ('Você  é considerada <mark> IDOSO </mark>')
+       }}
+
+    </script>
+</body>
+</html>  
