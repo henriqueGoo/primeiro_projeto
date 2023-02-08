@@ -124,8 +124,10 @@
         <fieldset>
         <img src="blank-profile-picture-973460_640.webp" id="imagem">
         <legend>Informe sua idade</legend>
+
         <label for="idade">Idade:</label>
         <input type="text" name="idade" id="idade" placeholder="informe sua idade" required autocomplete="off">
+        
         <div id="bnt" value="enviar" onclick="mandar()">Enviar</div> 
         <output id="saida">Resultado</output>
         </fieldset>
@@ -152,23 +154,29 @@
                 saida.innerHTML = (`<br>Para ser aprovado você tem que ter no máximo 10 faltas e uma média mínima de 7 pontos. <br>Você teve ${falta1} faltas<br>Primeira nota de ${nota1} pontos <br>Segunda nota de ${nota2} pontos <br>Terceira nota de ${nota3} pontos <br>Media de ${media}<br>Portanto você foi <mark style="background-color: red;">REPROVADO</mark>`)
             } else { 
                 saida.innerHTML = (`<br>Para ser aprovado você tem que ter no máximo 10 faltas e uma média mínima de 7 pontos. <br>Você teve ${falta1} faltas<br>Primeira nota de ${nota1} pontos <br>Segunda nota de ${nota2} pontos <br>Terceira nota de ${nota3} pontos <br>Media de ${media}<br>Portanto você foi <mark style="background-color: green;"> APROVADO</mark>`)}}}
+            
 
      
        function mandar(){
         var idade = document.querySelector('input#idade')
         var idade1 = Number(idade.value)
         var saida = document.querySelector('output#saida')
-        var img = document.querySelector("#image");
+        var img = document.getElementById("imagem");
         if(idade1 < 0 || !idade1){
             window.alert('[ERRO] Verifique os dados ou verifique se estar tudo preenchido e tente novamente')
+            
         } else if( idade1 <= 15){
             saida.innerHTML = ('Você ainda é considerada <mark> CRIANÇA </mark>')
+            document.getElementById("imagem").src='crianca-masculina.jpg';
         } else if (idade1 <= 30){
             saida.innerHTML = ('Parece que não, mas você ainda é considerado(a) <mark> JOVEM </mark>')
+            document.getElementById("imagem").src="adolencente-masculino.jpeg";
         } else if (idade1 <= 60){
             saida.innerHTML = ('Você ainda é considerada <mark> ADULTO </mark>')
+            document.getElementById("imagem").src="adulto-masculino.webp";
         } else if (idade1 > 60){
             saida.innerHTML = ('Você  é considerada <mark> IDOSO </mark>')
+            document.getElementById("imagem").src="senhora-masculino.jpeg";
        }}
 
     </script>
